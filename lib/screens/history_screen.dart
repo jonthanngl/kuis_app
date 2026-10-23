@@ -7,7 +7,6 @@ class HistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Mengambil riwayat kuis secara dinamis dari QuizProvider
     final quizProvider = context.watch<QuizProvider>();
     final List<Map<String, String>> historyData = quizProvider.history;
 
@@ -29,8 +28,7 @@ class HistoryScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final item = historyData[index];
                 final scoreStr = item['score'] ?? '0/100';
-                
-                // Cek apakah skor sempurna (misal 100/100 atau max score)
+
                 final parts = scoreStr.split('/');
                 final bool isPerfect = parts.length == 2 && parts[0] == parts[1];
 

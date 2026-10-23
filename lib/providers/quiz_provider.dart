@@ -7,7 +7,12 @@ class QuizProvider extends ChangeNotifier {
   int _score = 0;
   bool _isDarkMode = false;
 
-  // 10 Data Soal Dummy
+  final List<Map<String, String>> _history = [
+    {'title': 'Pemrograman Mobile', 'score': '100/100', 'date': '22 Okt 2026'},
+    {'title': 'Basis Data', 'score': '80/100', 'date': '20 Okt 2026'},
+    {'title': 'Algoritma', 'score': '90/100', 'date': '18 Okt 2026'},
+  ];
+
   final List<Question> _questions = [
     Question(questionText: 'Apa framework dari Google untuk membuat UI multi-platform?', options: ['React Native', 'Flutter', 'Kotlin', 'Swift'], correctAnswerIndex: 1),
     Question(questionText: 'Bahasa pemrograman utama yang digunakan dalam Flutter adalah?', options: ['Java', 'Dart', 'C++', 'Python'], correctAnswerIndex: 1),
@@ -26,6 +31,7 @@ class QuizProvider extends ChangeNotifier {
   int get score => _score;
   bool get isDarkMode => _isDarkMode;
   List<Question> get questions => _questions;
+  List<Map<String, String>> get history => _history;
   bool get isFinished => _currentIndex >= _questions.length;
 
   void setUserName(String name) {
@@ -43,13 +49,30 @@ class QuizProvider extends ChangeNotifier {
       _score += 10;
     }
     _currentIndex++;
+
+    if (_currentIndex == _questions.length) {
+      _saveCurrentQuizToHistory();
+    }
+
     notifyListeners();
+  }
+
+  void _saveCurrentQuizToHistory() {
+    final maxScore = _questions.length * 10;
+    final now = DateTime.now();
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
+    final dateStr = '${now.day} ${months[now.month - 1]} ${now.year}';
+
+    _history.insert(0, {
+      'title': 'Kuis Flutter & Pemrograman Mobile',
+      'score': '$_score/$maxScore',
+      'date': dateStr,
+    });
   }
 
   void resetQuiz() {
     _currentIndex = 0;
     _score = 0;
-    // userName tidak di-reset agar user tidak perlu login ulang saat main lagi
     notifyListeners();
   }
 }

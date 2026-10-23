@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/quiz_provider.dart';
 import '../widgets/custom_button.dart';
-import 'quiz_screen.dart'; // Akan dibuat pada tahap selanjutnya
+import 'main_screen.dart'; // Import MainScreen yang baru dibuat
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -21,22 +21,22 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _startQuiz() {
+  void _startApp() {
     if (_formKey.currentState!.validate()) {
       // Menyimpan nama ke Provider
       context.read<QuizProvider>().setUserName(_nameController.text.trim());
-
-      // Navigasi ke halaman kuis
-      Navigator.push(
+      
+      // Navigasi ke MainScreen (Dashboard utama) menggunakan pushReplacement 
+      // agar user tidak bisa back ke halaman login
+      Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const QuizScreen()),
+        MaterialPageRoute(builder: (context) => const MainScreen()),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // Penggunaan ukuran dinamis untuk menyesuaikan layar HP maupun Tablet/Web
     final screenWidth = MediaQuery.of(context).size.width;
     final formWidth = screenWidth > 600 ? 400.0 : screenWidth * 0.85;
 
@@ -76,12 +76,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   Text(
                     'Selamat Datang!',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Silakan masukkan nama Anda untuk memulai kuis.',
+                    'Silakan masukkan nama Anda untuk masuk ke aplikasi.',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
@@ -104,8 +104,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 32),
                   CustomButton(
-                    text: 'Mulai Kuis',
-                    onPressed: _startQuiz,
+                    text: 'Masuk',
+                    onPressed: _startApp,
                   ),
                 ],
               ),

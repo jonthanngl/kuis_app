@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/quiz_provider.dart';
 import '../widgets/option_card.dart';
-import 'result_screen.dart'; // Akan dibuat di tahap selanjutnya
+import 'result_screen.dart';
 
 class QuizScreen extends StatelessWidget {
   const QuizScreen({super.key});
@@ -10,8 +10,6 @@ class QuizScreen extends StatelessWidget {
   void _handleAnswer(BuildContext context, int selectedIndex) {
     final provider = context.read<QuizProvider>();
     provider.checkAnswer(selectedIndex);
-
-    // Jika soal sudah habis, pindah ke halaman hasil
     if (provider.isFinished) {
       Navigator.pushReplacement(
         context,
@@ -26,11 +24,10 @@ class QuizScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Kuis Berlangsung'),
         centerTitle: true,
-        automaticallyImplyLeading: false, // Mencegah user kembali ke halaman login saat kuis berjalan
+        automaticallyImplyLeading: false,
       ),
       body: Consumer<QuizProvider>(
         builder: (context, quizProvider, child) {
-          // Pencegahan error jika build terpanggil saat navigasi perpindahan layar
           if (quizProvider.isFinished) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -43,7 +40,7 @@ class QuizScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Indikator Progres Dinamis
+
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: LinearProgressIndicator(
@@ -63,7 +60,7 @@ class QuizScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
-                // Teks Pertanyaan
+
                 Expanded(
                   flex: 2,
                   child: Center(
@@ -79,17 +76,17 @@ class QuizScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
-                // Opsi Jawaban (Adaptive Design)
+
                 Expanded(
                   flex: 3,
                   child: LayoutBuilder(
                     builder: (context, constraints) {
-                      // Jika layar lebar (Tablet/Web) gunakan GridView
+     
                       if (constraints.maxWidth > 600) {
                         return GridView.builder(
                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            childAspectRatio: 2.5, // Proporsi lebar dan tinggi kartu
+                            childAspectRatio: 2.5, 
                             crossAxisSpacing: 16,
                             mainAxisSpacing: 16,
                           ),
@@ -102,7 +99,7 @@ class QuizScreen extends StatelessWidget {
                           },
                         );
                       }
-                      // Jika layar kecil (Smartphone) gunakan ListView vertikal
+
                       else {
                         return ListView.builder(
                           itemCount: question.options.length,

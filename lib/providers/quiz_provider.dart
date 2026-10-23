@@ -7,22 +7,18 @@ class QuizProvider extends ChangeNotifier {
   int _score = 0;
   bool _isDarkMode = false;
 
+  // 10 Data Soal Dummy
   final List<Question> _questions = [
-    Question(
-      questionText: 'Apa framework yang digunakan untuk membuat aplikasi ini?',
-      options: ['React Native', 'Flutter', 'Kotlin', 'Swift'],
-      correctAnswerIndex: 1,
-    ),
-    Question(
-      questionText: 'Manakah yang BUKAN merupakan jenis widget di Flutter?',
-      options: ['StatelessWidget', 'StatefulWidget', 'InheritedWidget', 'DynamicWidget'],
-      correctAnswerIndex: 3,
-    ),
-    Question(
-      questionText: 'Apa fungsi utama dari State Management?',
-      options: ['Mendesain UI', 'Menyimpan data di database', 'Mengelola perubahan data dan state UI', 'Menghubungkan API'],
-      correctAnswerIndex: 2,
-    ),
+    Question(questionText: 'Apa framework dari Google untuk membuat UI multi-platform?', options: ['React Native', 'Flutter', 'Kotlin', 'Swift'], correctAnswerIndex: 1),
+    Question(questionText: 'Bahasa pemrograman utama yang digunakan dalam Flutter adalah?', options: ['Java', 'Dart', 'C++', 'Python'], correctAnswerIndex: 1),
+    Question(questionText: 'Manakah widget yang state-nya tidak dapat diubah setelah dibuat?', options: ['StatefulWidget', 'StatelessWidget', 'InheritedWidget', 'Container'], correctAnswerIndex: 1),
+    Question(questionText: 'Fungsi utama dari metode setState() adalah?', options: ['Menghapus data', 'Memicu build ulang UI', 'Berpindah halaman', 'Menyimpan ke database'], correctAnswerIndex: 1),
+    Question(questionText: 'Widget apa yang digunakan untuk membuat daftar yang bisa di-scroll?', options: ['Column', 'Row', 'ListView', 'Stack'], correctAnswerIndex: 2),
+    Question(questionText: 'Apa perintah terminal untuk mengecek isu pada instalasi Flutter?', options: ['flutter run', 'flutter build', 'flutter doctor', 'flutter clean'], correctAnswerIndex: 2),
+    Question(questionText: 'Manakah yang BUKAN merupakan jenis State Management?', options: ['Provider', 'Bloc', 'Redux', 'MySQL'], correctAnswerIndex: 3),
+    Question(questionText: 'Widget apa yang mengatur tata letak anak-anaknya secara horizontal?', options: ['Column', 'Row', 'ListView', 'Grid'], correctAnswerIndex: 1),
+    Question(questionText: 'File konfigurasi utama pada proyek Flutter adalah?', options: ['pubspec.yaml', 'build.gradle', 'AndroidManifest.xml', 'main.dart'], correctAnswerIndex: 0),
+    Question(questionText: 'Untuk membuat navigasi antar halaman di Flutter, kita menggunakan?', options: ['Router', 'Navigator', 'Link', 'Intent'], correctAnswerIndex: 1),
   ];
 
   String get userName => _userName;
@@ -53,7 +49,7 @@ class QuizProvider extends ChangeNotifier {
   void resetQuiz() {
     _currentIndex = 0;
     _score = 0;
-    _userName = '';
+    // userName tidak di-reset agar user tidak perlu login ulang saat main lagi
     notifyListeners();
   }
 }

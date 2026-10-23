@@ -12,8 +12,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-
-  // FavoriteScreen dihapus dari daftar
   final List<Widget> _pages = [
     const HomeScreen(),
     const HistoryScreen(),

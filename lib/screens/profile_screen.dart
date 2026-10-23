@@ -9,7 +9,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Mengambil state dari provider
     final quizProvider = context.watch<QuizProvider>();
     final String userName = quizProvider.userName;
 
@@ -24,7 +23,7 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Foto Profil Dummy
+
               CircleAvatar(
                 radius: 60,
                 backgroundColor: Theme.of(context).primaryColor.withValues(alpha: 0.1),
@@ -36,7 +35,6 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
-              // Nama Pengguna dari Provider
               Text(
                 userName.isNotEmpty ? userName : 'Pengguna',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -53,8 +51,6 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-
-              // Statistik Dummy
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -65,16 +61,14 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 48),
 
-              // Tombol Logout
               CustomButton(
                 text: 'Keluar',
                 width: 200,
                 onPressed: () {
-                  // Hapus nama pengguna dari provider
+
                   quizProvider.setUserName('');
                   quizProvider.resetQuiz();
-
-                  // Kembali ke halaman Login
+                  
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => const LoginScreen()),
@@ -89,7 +83,6 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  // Widget pembantu untuk kolom statistik
   Widget _buildStatItem(BuildContext context, String label, String value) {
     return Column(
       children: [

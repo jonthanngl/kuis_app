@@ -44,19 +44,6 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         title: const Text('Kuis anak Ilmu Komputer kece'),
         centerTitle: true,
-        actions: [
-          Consumer<QuizProvider>(
-            builder: (context, provider, child) {
-              return IconButton(
-                icon: Icon(
-                  provider.isDarkMode ? Icons.light_mode : Icons.dark_mode,
-                ),
-                tooltip: 'Ganti Tema',
-                onPressed: () => provider.toggleTheme(),
-              );
-            },
-          ),
-        ],
       ),
       body: Center(
         child: SingleChildScrollView(

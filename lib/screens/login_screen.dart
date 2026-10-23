@@ -25,8 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {
       // Menyimpan nama ke Provider
       context.read<QuizProvider>().setUserName(_nameController.text.trim());
-      
-      // Navigasi ke MainScreen (Dashboard utama) menggunakan pushReplacement 
+
+      // Navigasi ke MainScreen (Dashboard utama) menggunakan pushReplacement
       // agar user tidak bisa back ke halaman login
       Navigator.pushReplacement(
         context,
@@ -76,8 +76,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   Text(
                     'Selamat Datang!',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(

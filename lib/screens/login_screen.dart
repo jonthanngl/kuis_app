@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kuis PM 1 & 3'),
+        title: const Text('Kuis anak Ilmu Komputer kece'),
         centerTitle: true,
         actions: [
           Consumer<QuizProvider>(

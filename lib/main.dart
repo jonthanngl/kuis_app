@@ -50,14 +50,13 @@ class MyApp extends StatelessWidget {
             ),
           ),
 
-          // TEMA GELAP (DIPERBARUI)
           darkTheme: ThemeData(
             brightness: Brightness.dark,
-            primaryColor: Colors.blueAccent, // Warna utama lebih cerah untuk dark mode
-            scaffoldBackgroundColor: const Color(0xFF121212), // Standar Material Dark
+            primaryColor: Colors.blueAccent, 
+            scaffoldBackgroundColor: const Color(0xFF121212),
             colorScheme: const ColorScheme.dark(
               primary: Colors.blueAccent,
-              surface: Color(0xFF1E1E1E), // Warna elemen melayang (Card, Dialog)
+              surface: Color(0xFF1E1E1E), 
             ),
             textTheme: GoogleFonts.poppinsTextTheme(
               ThemeData(brightness: Brightness.dark).textTheme,

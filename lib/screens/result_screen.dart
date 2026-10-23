@@ -2,21 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/quiz_provider.dart';
 import '../widgets/custom_button.dart';
-import 'login_screen.dart';
+import 'main_screen.dart'; // Import MainScreen
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Membaca nilai dari provider hanya sekali saat render
     final quizProvider = context.read<QuizProvider>();
     final int score = quizProvider.score;
     final String name = quizProvider.userName;
     final int totalSoal = quizProvider.questions.length;
-    final int maxScore = totalSoal * 10; // Disesuaikan dengan logika di checkAnswer (10 poin per soal)
+    final int maxScore = totalSoal * 10;
 
-    // Menentukan pesan umpan balik berdasarkan perolehan skor
     String feedbackMessage;
     if (score == maxScore) {
       feedbackMessage = 'Sempurna! Kamu menguasai semua materi.';
@@ -30,7 +28,7 @@ class ResultScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Hasil Kuis'),
         centerTitle: true,
-        automaticallyImplyLeading: false, // Mencegah tombol back dari sistem agar tidak merusak alur
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -39,7 +37,6 @@ class ResultScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Ikon Trofi
               const Icon(
                 Icons.emoji_events_rounded,
                 size: 150,
@@ -47,7 +44,6 @@ class ResultScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
-              // Nama Pengguna
               Text(
                 'Kerja Bagus, $name!',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -57,14 +53,13 @@ class ResultScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
-              // Kartu Skor Akhir (UI Kontras)
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 48),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+                  color: Theme.of(context).primaryColor.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(24),
                   border: Border.all(
-                    color: Theme.of(context).primaryColor.withValues(alpha: 0.5),
+                    color: Theme.of(context).primaryColor.withOpacity(0.5),
                     width: 2,
                   ),
                 ),
@@ -87,7 +82,6 @@ class ResultScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
-              // Pesan Evaluasi
               Text(
                 feedbackMessage,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -98,18 +92,17 @@ class ResultScreen extends StatelessWidget {
               ),
               const SizedBox(height: 48),
 
-              // Tombol Ulangi Kuis (Menggunakan Reusable Widget)
               CustomButton(
-                text: 'Mulai Ulang Kuis',
-                width: 250, // Membatasi lebar tombol agar proporsional
+                text: 'Kembali ke Beranda',
+                width: 250,
                 onPressed: () {
-                  // Mereset state aplikasi melalui provider
+                  // Mereset state progres kuis agar bisa dikerjakan ulang nantinya
                   quizProvider.resetQuiz();
 
-                  // Navigasi kembali ke halaman Login sambil menghapus semua riwayat halaman sebelumnya
+                  // Navigasi kembali ke MainScreen dan menghapus riwayat halaman Hasil & Kuis
                   Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => const LoginScreen()),
+                    MaterialPageRoute(builder: (context) => const MainScreen()),
                         (Route<dynamic> route) => false,
                   );
                 },

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/quiz_provider.dart';
 import '../widgets/custom_button.dart';
-import 'main_screen.dart'; // Import MainScreen yang baru dibuat
+import 'main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -23,11 +23,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _startApp() {
     if (_formKey.currentState!.validate()) {
-      // Menyimpan nama ke Provider
+
       context.read<QuizProvider>().setUserName(_nameController.text.trim());
 
-      // Navigasi ke MainScreen (Dashboard utama) menggunakan pushReplacement
-      // agar user tidak bisa back ke halaman login
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const MainScreen()),
